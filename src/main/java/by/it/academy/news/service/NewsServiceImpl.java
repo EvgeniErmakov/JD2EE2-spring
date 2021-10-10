@@ -62,4 +62,14 @@ public class NewsServiceImpl implements NewsService {
       throw new NewsServiceException(e);
     }
   }
+
+  @Transactional
+  @Override
+  public void addNews(News news) throws NewsServiceException {
+    try {
+      newsDAO.addNews(news);
+    } catch (DAOException e) {
+      throw new NewsServiceException(e);
+    }
+  }
 }

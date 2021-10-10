@@ -65,6 +65,10 @@
 
 <div class="heading">
     <h1 class=headline2>News Portal</h1>
+
+    <c:url var="showDeleteLink" value="/news/toAddNewsPage"/>
+    <a style="color: grey; margin-left: 30px" href="${showDeleteLink}">Create a news</a>
+
 </div>
 
 <HR WIDTH="70%" ALIGN="center" SIZE="1">

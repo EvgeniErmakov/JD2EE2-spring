@@ -12,15 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -87,6 +80,14 @@ public class MainPageCommand {
     return GO_TO_UPDATE_PAGE;
   }
 
+  @RequestMapping("/toAddNewsPage")
+  public String toAddNewsPage(Model model)
+          throws NewsServiceException {
+    News theNews = new News();
+    model.addAttribute(NEWS_ATTRIBUTE, theNews);
+    return "create-news";
+  }
+
   @PutMapping("/{id}")
   public String updateNews(@PathVariable("id") int id, final HttpSession httpSession, @Valid @ModelAttribute(NEWS_ATTRIBUTE) final News news,
       final BindingResult bindingResult, final RedirectAttributes redirectAttributes)
@@ -135,5 +136,18 @@ public class MainPageCommand {
     int currentPage = (int) httpSession.getAttribute(CURRENT_PAGE_NUMBER_ATTRIBUTE);
 
     return REDIRECT_NEWS_START_PAGE + currentPage;
+  }
+
+  @PostMapping("/add")
+  public ModelAndView saveNews(@Valid @ModelAttribute("news") News news, BindingResult theBindingResult) throws NewsServiceException {
+    ModelAndView modelAndView = new ModelAndView();
+    if (theBindingResult.hasErrors()) {
+      modelAndView.setViewName("create-news");
+    } else {
+      newsService.addNews(news);
+      modelAndView.setViewName("redirect:/news/start");
+    }
+    return modelAndView;
+
   }
 }

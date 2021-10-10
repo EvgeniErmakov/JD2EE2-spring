@@ -2,6 +2,8 @@ package by.it.academy.news.dao;
 
 import by.it.academy.news.bean.News;
 import by.it.academy.news.dao.exceptions.DAOException;
+import by.it.academy.news.service.exceptions.NewsServiceException;
+
 import java.util.List;
 
 public interface NewsDAO {
@@ -10,6 +12,8 @@ public interface NewsDAO {
   News getSingleNews(int id) throws DAOException;
 
   void updateNews(News news) throws DAOException;
+
+  void addNews(News news) throws DAOException;
 
   void deleteNews(int id) throws DAOException;
 
