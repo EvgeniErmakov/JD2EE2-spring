@@ -32,8 +32,11 @@ public class MainPageCommand {
   private static final String ALL_NEWS_ATTRIBUTE = "allNews";
   private static final String PAGE_COUNT_ATTRIBUTE = "pageCount";
   private static final String CURRENT_PAGE_NUMBER_ATTRIBUTE = "currentPageNumber";
-
+  private static final String GO_TO_MAIN_PAGE = "main-page";
+  private static final String GO_TO_UPDATE_PAGE = "update-page";
+  private static final String GO_TO_SINGLE_NEWS_PAGE = "single-news-page";
   private static final String CSS_ATTRIBUTE = "css";
+  private static final String REDIRECT_NEWS_START_PAGE = "redirect:/news/start?page=";
   private static final String MSG_ATTRIBUTE = "msg";
   private static final String CSS_DANGER_VALUE = "danger";
   private static final String CSS_SUCCESS_VALUE = "success";
@@ -61,7 +64,7 @@ public class MainPageCommand {
     model.addAttribute(PAGE_COUNT_ATTRIBUTE, pageCount);
     httpSession.setAttribute(CURRENT_PAGE_NUMBER_ATTRIBUTE, page);
 
-    return "main-page";
+    return GO_TO_MAIN_PAGE;
   }
 
   @GetMapping("/{id}")
@@ -70,7 +73,7 @@ public class MainPageCommand {
     final News singleNews = newsService.getSingleNews(id);
     model.addAttribute(NEWS_ATTRIBUTE, singleNews);
 
-    return "single-news-page";
+    return GO_TO_SINGLE_NEWS_PAGE;
   }
 
   @RequestMapping("/showUpdate")
@@ -81,16 +84,12 @@ public class MainPageCommand {
       model.addAttribute(NEWS_ATTRIBUTE, singleNews);
     }
 
-    return "update-page";
+    return GO_TO_UPDATE_PAGE;
   }
 
   @PutMapping("/{id}")
-  public String updateNews(
-      @PathVariable("id") int id,
-      final HttpSession httpSession,
-      @Valid @ModelAttribute(NEWS_ATTRIBUTE) final News news,
-      final BindingResult bindingResult,
-      final RedirectAttributes redirectAttributes)
+  public String updateNews(@PathVariable("id") int id, final HttpSession httpSession, @Valid @ModelAttribute(NEWS_ATTRIBUTE) final News news,
+      final BindingResult bindingResult, final RedirectAttributes redirectAttributes)
       throws NewsServiceException {
     if (bindingResult.hasErrors()) {
       redirectAttributes.addFlashAttribute(
@@ -107,7 +106,7 @@ public class MainPageCommand {
 
       int currentPage = (int) httpSession.getAttribute(CURRENT_PAGE_NUMBER_ATTRIBUTE);
 
-      return "redirect:/news/start?page=" + currentPage;
+      return REDIRECT_NEWS_START_PAGE + currentPage;
     }
   }
 
@@ -123,7 +122,7 @@ public class MainPageCommand {
 
     int currentPage = (int) httpSession.getAttribute(CURRENT_PAGE_NUMBER_ATTRIBUTE);
 
-    return "redirect:/news/start?page=" + currentPage;
+    return REDIRECT_NEWS_START_PAGE + currentPage;
   }
 
   @ExceptionHandler(NewsServiceException.class)
@@ -135,6 +134,6 @@ public class MainPageCommand {
 
     int currentPage = (int) httpSession.getAttribute(CURRENT_PAGE_NUMBER_ATTRIBUTE);
 
-    return "redirect:/news/start?page=" + currentPage;
+    return REDIRECT_NEWS_START_PAGE + currentPage;
   }
 }
