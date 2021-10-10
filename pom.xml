@@ -1,18 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>JD2EE-news-spring</groupId>
-    <artifactId>JD2EE-news-spring</artifactId>
+    <groupId>by.it.academy.news</groupId>
+    <artifactId>it-academy-news-mvc</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>JD2EE-news-spring</name>
+    <name>it-academy-news-mvc Maven Webapp</name>
     <url>https://www.example.com</url>
 
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.13.2</version>
+            <version>4.12</version>
             <scope>test</scope>
         </dependency>
 
@@ -26,19 +26,19 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>5.3.10</version>
+            <version>5.0.6.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <version>5.3.10</version>
+            <version>5.0.6.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>5.3.10</version>
+            <version>5.0.6.RELEASE</version>
         </dependency>
 
         <dependency>
@@ -50,19 +50,19 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.5.7.Final</version>
+            <version>5.2.10.Final</version>
         </dependency>
 
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>7.0.1.Final</version>
+            <version>6.0.13.Final</version>
         </dependency>
 
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.25</version>
+            <version>8.0.14</version>
         </dependency>
 
         <dependency>
@@ -74,19 +74,19 @@
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
-            <version>2.4.0-b180830.0359</version>
+            <version>2.2.8</version>
         </dependency>
 
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-core</artifactId>
-            <version>3.0.1</version>
+            <version>2.3.0.1</version>
         </dependency>
 
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
-            <version>3.0.1</version>
+            <version>2.3.0.1</version>
         </dependency>
 
         <dependency>
@@ -94,17 +94,12 @@
             <artifactId>javax.activation</artifactId>
             <version>1.2.0</version>
         </dependency>
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>2.0.1.Final</version>
-        </dependency>
 
     </dependencies>
 
     <build>
-        <finalName>JD2EE-news-spring</finalName>
-        <pluginManagement>
+        <finalName>it-academy-news-mvc</finalName>
+        <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
 
                 <plugin>
@@ -136,17 +131,17 @@
                     <artifactId>spotless-maven-plugin</artifactId>
                     <version>2.13.0</version>
                     <configuration>
-
+                        <!-- optional: limit format enforcement to just the files changed by this feature branch -->
                         <ratchetFrom>origin/main</ratchetFrom>
                         <formats>
-
+                            <!-- you can define as many formats as you want, each is independent -->
                             <format>
-
+                                <!-- define the files to apply to -->
                                 <includes>
                                     <include>*.md</include>
                                     <include>.gitignore</include>
                                 </includes>
-
+                                <!-- define the steps to apply to those files -->
                                 <trimTrailingWhitespace/>
                                 <endWithNewline/>
                                 <indent>
@@ -155,20 +150,23 @@
                                 </indent>
                             </format>
                         </formats>
-
+                        <!-- define a language-specific format -->
                         <java>
+                            <!-- no need to specify files, inferred automatically, but you can if you want -->
 
-
+                            <!-- apply a specific flavor of google-java-format and reflow long strings -->
                             <googleJavaFormat>
-                                <version>1.8</version>
-                                <style>GOOGLE</style>
-                                <reflowLongStrings>true</reflowLongStrings>
+                                <version>1.8</version>                      <!-- optional -->
+                                <style>GOOGLE</style>                       <!-- or AOSP (optional) -->
+                                <reflowLongStrings>true</reflowLongStrings> <!-- optional (requires at least 1.8) -->
                             </googleJavaFormat>
 
-
+                            <!-- make sure every file has the following copyright header.
+                              optionally, Spotless can set copyright years by digging
+                              through git history (see "license" section below) -->
                             <licenseHeader>
                                 <content>/* (C)$YEAR */
-                                </content>
+                                </content>  <!-- or <file>${project.basedir}/license-header</file> -->
                             </licenseHeader>
                         </java>
                     </configuration>

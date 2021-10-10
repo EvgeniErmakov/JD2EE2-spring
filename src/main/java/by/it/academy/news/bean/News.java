@@ -23,27 +23,17 @@ public class News implements Serializable {
   private int id;
 
   @NotNull(message = "This field can not be null or empty")
-  @Size(
-      min = 5,
-      max = 200,
-      message = "The content of the field should be between 10 and 100 chars")
   @Column(name = "title")
-  @Pattern(regexp = "(.){3,45}", message = "АХАХХАХАХАХАХА!!111")
+  @Pattern(regexp = "(.){3,200}", message = "The content of the field must be between 3 and 200 chars")
   private String title;
 
   @NotNull(message = "This field can not be null or empty")
-  @Size(
-      min = 5,
-      max = 1000,
-      message = "The content of the field should be between 50 and 200 chars")
+  @Pattern(regexp = "(.){50,1000}", message = "The content of the field must be between 50 and 1000 chars")
   @Column(name = "brief")
   private String brief;
 
   @NotNull(message = "This field can not be null or empty")
-  @Size(
-      min = 5,
-      max = 5000,
-      message = "The content of the field should be between 100 and 1000 chars")
+  @Pattern(regexp = "(.){50,5000}", message = "The content of the field must be between 50 and 5000 chars")
   @Column(name = "content")
   private String body;
 
