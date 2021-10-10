@@ -56,6 +56,27 @@
             font-size: 35px;
             color: #008000;
         }
+        .heading-2 {
+            color: black;
+            display: flex;
+            flex-direction: column;
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+        .heading-1 {
+            display: flex;
+            justify-content: center;
+        }
+        .button {
+            margin: 5px;
+            background: #408080;
+            color: #000000;
+            width: 225px;
+            height: 40px;
+            font-size: 25px;
+            cursor: pointer;
+            text-align: center;
+        }
     </style>
 
 </head>
@@ -66,10 +87,15 @@
 <div class="heading">
     <h1 class=headline2>News Portal</h1>
 
-    <c:url var="showDeleteLink" value="/news/toAddNewsPage"/>
-    <a style="color: grey; margin-left: 30px" href="${showDeleteLink}">Create a news</a>
-
+    <div class=heading-1>
+        <div class="heading-2">
+        <form:form action="toAddNewsPage" modelAttribute="news" method="GET" >
+            <input  type="submit" class="button" value="Create a news"/>
+        </form:form>
+        </div>
+    </div>
 </div>
+
 
 <HR WIDTH="70%" ALIGN="center" SIZE="1">
 
@@ -91,9 +117,11 @@
             <td ALIGN="center"><p class="textDescription">
                 <p>${news.brief}</p>
 
-                <c:url var="showUpdateLink" value="/news/showUpdate?id=${news.id}"/>
-                <a href="${showUpdateLink}"
-                   style="font-size: 20px;display: inline-block;background: #408080;color: black; padding: 1rem 1.5rem; text-decoration: none; ">Update</a>
+                <form:form action="showUpdate?id=${news.id}" modelAttribute="news" method="POST" style="display: inline-block; text-decoration: none;">
+                    <input  type="submit" value="Update" style="font-size: 20px;display: inline-block;
+                    background: #408080;color: black; padding: 1rem 1.5rem; text-decoration: none; "/>
+                </form:form>
+
 
                 <form:form action="${news.id}" modelAttribute="news" method="DELETE" style="display: inline-block; text-decoration: none;">
                     <input  type="submit" value="Delete" style="font-size: 20px;display: inline-block;
