@@ -10,6 +10,8 @@
             display: flex;
             flex-flow: column wrap;
             align-items: center;
+            color: red;
+            font-size: 40px;
         }
 
         .heading {
@@ -19,6 +21,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+        .reference {
+            margin: 50px;
+            font-size: 75px;
+            font-family: serif !important;
+            text-align: left;
+            link: black;
+            color: black;
         }
     </style>
 </head>

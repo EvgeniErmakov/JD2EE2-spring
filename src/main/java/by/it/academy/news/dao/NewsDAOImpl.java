@@ -15,11 +15,14 @@ import org.springframework.stereotype.Repository;
 public class NewsDAOImpl implements NewsDAO {
     @Autowired
     private SessionFactory sessionFactory;
+    private static final String SELECT_ALL_NEWS_QUERY = "from News order by date";
+    private static final String DELETE_NEWS_WITH_ID_QUERY = "delete from News where id=:id";
+    private static final String SELECT_COUNT_OF_NEWS_QUERY = "select count(all n.id) from News n";
 
     @Override
     public List<News> getAllNews(int offset, int noOfRecords) throws DAOException {
-        final Session currentSession = sessionFactory.getCurrentSession();
-        final Query<News> query = currentSession.createQuery("from News order by date", News.class);
+        Session currentSession = sessionFactory.getCurrentSession();
+        Query<News> query = currentSession.createQuery(SELECT_ALL_NEWS_QUERY, News.class);
 
         try {
             return query.setFirstResult(offset).setMaxResults(noOfRecords).getResultList();
@@ -30,7 +33,7 @@ public class NewsDAOImpl implements NewsDAO {
 
     @Override
     public News getSingleNews(final int id) throws DAOException {
-        final Session currentSession = sessionFactory.getCurrentSession();
+        Session currentSession = sessionFactory.getCurrentSession();
 
         try {
             return currentSession.get(News.class, id);
@@ -41,7 +44,7 @@ public class NewsDAOImpl implements NewsDAO {
 
     @Override
     public void updateNews(final News news) throws DAOException {
-        final Session currentSession = sessionFactory.getCurrentSession();
+        Session currentSession = sessionFactory.getCurrentSession();
 
         try {
             currentSession.update(news);
@@ -52,12 +55,11 @@ public class NewsDAOImpl implements NewsDAO {
 
     @Override
     public void deleteNews(int id) throws DAOException {
-        final Session currentSession = sessionFactory.getCurrentSession();
+        Session currentSession = sessionFactory.getCurrentSession();
 
         try {
-            final Query query = currentSession.createQuery("delete from News where id=:id");
+            Query query = currentSession.createQuery(DELETE_NEWS_WITH_ID_QUERY);
             query.setParameter("id", id);
-
             query.executeUpdate();
         } catch (RuntimeException e) {
             throw new DAOException(e);
@@ -66,9 +68,8 @@ public class NewsDAOImpl implements NewsDAO {
 
     @Override
     public int getNumberOfAllNews() throws DAOException {
-        final Session currentSession = sessionFactory.getCurrentSession();
-        final Query<Long> theQuery =
-                currentSession.createQuery("select count(all n.id) from News n", Long.class);
+        Session currentSession = sessionFactory.getCurrentSession();
+        Query<Long> theQuery = currentSession.createQuery(SELECT_COUNT_OF_NEWS_QUERY, Long.class);
 
         try {
             return theQuery.getResultList().get(0).intValue();
@@ -79,10 +80,9 @@ public class NewsDAOImpl implements NewsDAO {
 
     @Override
     public void addNews(News news) {
-        final Session currentSession = sessionFactory.getCurrentSession();
-        news.setAuthor("213");
+        Session currentSession = sessionFactory.getCurrentSession();
+        news.setAuthor(null);
         news.setDate(null);
         currentSession.save(news);
     }
-
 }

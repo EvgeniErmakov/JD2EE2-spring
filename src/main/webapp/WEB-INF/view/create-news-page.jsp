@@ -76,7 +76,7 @@
 <div class="content"
      style=" background-color: white; color: #95af88; padding: 10px 20px 20px; font-size: large; font-family: Verdana, serif"; ALIGN="center">
 
-    <form:form style="display: inline-block; text-decoration: none;" action="add"  modelAttribute="news" method="POST">
+    <form:form style="display: inline-block; text-decoration: none;" action="addNews"  modelAttribute="news" method="POST">
 
         <form:hidden path="id"/>
 

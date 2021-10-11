@@ -117,7 +117,7 @@
             <td ALIGN="center"><p class="textDescription">
                 <p>${news.brief}</p>
 
-                <form:form action="showUpdate?id=${news.id}" modelAttribute="news" method="POST" style="display: inline-block; text-decoration: none;">
+                <form:form action="showUpdatePage?id=${news.id}" modelAttribute="news" method="POST" style="display: inline-block; text-decoration: none;">
                     <input  type="submit" value="Update" style="font-size: 20px;display: inline-block;
                     background: #408080;color: black; padding: 1rem 1.5rem; text-decoration: none; "/>
                 </form:form>
