@@ -81,7 +81,6 @@ public class MainPageCommand {
 
     @RequestMapping(value="/login", method=RequestMethod.GET)
     public String login() {
-        System.out.println("логииин!");
         return "login";
     }
 

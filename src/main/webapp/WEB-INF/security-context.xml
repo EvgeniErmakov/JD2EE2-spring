@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
-	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.1.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	<security:http auto-config="true" use-expressions="false">
+<beans:beans
+		xmlns="http://www.springframework.org/schema/security"
+		xmlns:beans="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security.xsd">
 
-		<security:form-login login-page="/news/login" login-processing-url="/news/login" username-parameter="username" password-parameter="password"/>
+	<http auto-config="true" use-expressions="false">
 
+		<form-login login-page="/news/login" login-processing-url="/news/login"  username-parameter="username" password-parameter="password"/>
 
-		<security:intercept-url pattern="/news/toAddNewsPage" access="ROLE_USER" />
-	</security:http>
+		<access-denied-handler error-page="/news/login" />
 
-	<security:authentication-manager>
-		<security:authentication-provider>
-			<security:user-service>
-				<security:user name="user" password="password" authorities="ROLE_USER" />
-			</security:user-service>
-		</security:authentication-provider>
-	</security:authentication-manager>
-</beans>
+		<intercept-url pattern="/news/toAddNewsPage" access="ROLE_USER" />
+	</http>
+
+	<authentication-manager>
+		<authentication-provider>
+			<jdbc-user-service data-source-ref="myDataSource"
+							   users-by-username-query="select username,password, enabled from users where username=?"
+							   authorities-by-username-query="select username, role from users where username =?  " />
+		</authentication-provider>
+	</authentication-manager>
+
+	<beans:import resource="spring-mvc-servlet.xml"/>
+</beans:beans>
