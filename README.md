@@ -1,1 +1,1 @@
-# it-academy-news-mvc
+# Project "NEWS" with Spring.
