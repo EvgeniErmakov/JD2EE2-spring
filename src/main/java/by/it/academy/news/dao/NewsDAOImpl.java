@@ -2,6 +2,7 @@ package by.it.academy.news.dao;
 
 import by.it.academy.news.bean.News;
 import by.it.academy.news.dao.exceptions.DAOException;
+
 import java.util.List;
 
 import org.hibernate.Session;

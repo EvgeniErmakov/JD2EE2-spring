@@ -2,15 +2,14 @@ package by.it.academy.news.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "news")
@@ -24,16 +23,16 @@ public class News implements Serializable {
 
   @NotNull(message = "This field can not be null or empty")
   @Column(name = "title")
-  @Pattern(regexp = "(.){3,200}", message = "The content of the field must be between 3 and 200 chars")
+  @Pattern(regexp = "(.){3,200}", message = "The title must be between 3 and 200 chars")
   private String title;
 
   @NotNull(message = "This field can not be null or empty")
-  @Pattern(regexp = "(.){50,1000}", message = "The content of the field must be between 50 and 1000 chars")
+  @Pattern(regexp = "(.){50,1000}", message = "The brief must be between 50 and 1000 chars")
   @Column(name = "brief")
   private String brief;
 
   @NotNull(message = "This field can not be null or empty")
-  @Pattern(regexp = "(.){50,5000}", message = "The content of the field must be between 50 and 5000 chars")
+  @Pattern(regexp = "(.){50,5000}", message = "The content must be between 50 and 5000 chars")
   @Column(name = "content")
   private String body;
 
