@@ -79,6 +79,13 @@ public class MainPageCommand {
         return GO_TO_CREATE_NEWS_PAGE;
     }
 
+    @RequestMapping(value="/login", method=RequestMethod.GET)
+    public String login() {
+        System.out.println("логииин!");
+        return "login";
+    }
+
+
     @PostMapping("/addNews")
     public ModelAndView addNews(@Valid @ModelAttribute("news") News news, BindingResult theBindingResult) throws NewsServiceException {
         ModelAndView modelAndView = new ModelAndView();

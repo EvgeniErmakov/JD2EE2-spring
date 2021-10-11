@@ -83,7 +83,7 @@
         <div style="align-content: center;">
             <form:errors path="title" cssClass="error" cssStyle="color: indianred"/><br>
             <label for="title" style="color: black;">Title:</label>
-            <form:textarea id="title" name="title" cols="90" maxlength="300"  path="title"/>
+            <form:textarea id="title" name="title" cols="90" maxlength="200"  path="title"/>
         </div>
 
         <div >
@@ -96,7 +96,7 @@
         <div>
             <form:errors path="body" cssClass="error" cssStyle="color: indianred"/><br>
             <label for="body" style="color: black;">Body:</label>
-            <form:textarea class="form-control" id="body" name="body" rows="20" cols="90" maxlength="10000"
+            <form:textarea class="form-control" id="body" name="body" rows="20" cols="90" maxlength="5000"
                            path="body"/>
         </div>
 
