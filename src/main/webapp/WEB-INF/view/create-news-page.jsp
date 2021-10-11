@@ -37,22 +37,26 @@
         padding: 1rem 1.5rem;
         text-decoration: none;
     }
-    .textNews {
-        font-size: 35px;
-        width: auto;
-        word-break: break-word;
-        color: #000000;
-        margin: auto;
-        text-align: justify;
-        align-items: center;
+    .heading-2 {
+        color: black;
+        display: flex;
+        flex-direction: column;
+        margin-right: 10px;
+        margin-left: 10px;
     }
-
-    .textDescription {
-        text-indent: 75px;
-        text-align: justify;
-        margin: 10px;
-        font-size: 28px;
+    .heading-1 {
+        display: flex;
+        justify-content: center;
+    }
+    .button {
+        margin: 5px;
+        background: #408080;
         color: #000000;
+        width: 225px;
+        height: 40px;
+        font-size: 25px;
+        cursor: pointer;
+        text-align: center;
     }
 </style>
 
@@ -63,6 +67,16 @@
         <c:url var="showUpdateLink" value="/news/start"/>
         <a class="reference" href=${showUpdateLink}>News Portal</a>
     </h1>
+
+    <div class=heading-1>
+        <div class="heading-2">
+            <form:form
+                    action="${pageContext.request.contextPath}/logout"
+                    method="post">
+                <input type="submit" class="button" value="Exit">
+            </form:form>
+        </div>
+    </div>
 </div>
 
 

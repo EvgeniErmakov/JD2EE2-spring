@@ -15,6 +15,9 @@
 		<access-denied-handler error-page="/news/login" />
 
 		<intercept-url pattern="/news/toAddNewsPage" access="ROLE_USER" />
+
+		<logout logout-success-url="/news/start" />
+
 	</http>
 
 	<authentication-manager>
