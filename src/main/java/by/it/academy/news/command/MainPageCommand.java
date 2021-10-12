@@ -28,6 +28,7 @@ public class MainPageCommand {
     private static final String PAGE_COUNT_ATTRIBUTE = "pageCount";
     private static final String UPDATE_FAILED_MESSAGE = "Update failed";
     private static final String NEWS_WAS_UPDATED_MESSAGE = "News was updated!";
+    private static final String NEWS_WAS_PUBLISHED_MESSAGE = "News was published!";
     private static final String CURRENT_PAGE_NUMBER_ATTRIBUTE = "currentPageNumber";
     private static final String GO_TO_MAIN_PAGE = "main-page";
     private static final String GO_TO_UPDATE_PAGE = "update-page";
@@ -36,6 +37,7 @@ public class MainPageCommand {
     private static final String GO_TO_OFFER_NEWS_PAGE = "offer-news-page";
     private static final String GO_TO_OFFERED_NEWS_PAGE = "offered-news-page";
     private static final String CSS_ATTRIBUTE = "css";
+    private static final String REDIRECT_NEWS_OFFERED_PAGE = "redirect:/news/toOfferedNewsPage?page=";
     private static final String REDIRECT_NEWS_START_PAGE = "redirect:/news/start?page=";
     private static final String MSG_ATTRIBUTE = "msg";
     private static final String CSS_DANGER_VALUE = "danger";
@@ -77,7 +79,7 @@ public class MainPageCommand {
         model.addAttribute(ALL_NEWS_ATTRIBUTE, allNews);
         model.addAttribute(PAGE_COUNT_ATTRIBUTE, pageCount);
         httpSession.setAttribute(CURRENT_PAGE_NUMBER_ATTRIBUTE, page);
-
+        System.out.println("offered");
         return GO_TO_OFFERED_NEWS_PAGE;
     }
 
@@ -166,6 +168,25 @@ public class MainPageCommand {
             return REDIRECT_NEWS_START_PAGE + currentPage;
         }
     }
+
+
+    @PutMapping("/publish/{id}")
+    public String publishNews(@PathVariable(PATH_VARIABLE_ID) int id, final HttpSession httpSession,
+                              @Valid @ModelAttribute(NEWS_ATTRIBUTE) final News news, final BindingResult bindingResult,
+                              final RedirectAttributes redirectAttributes)
+            throws NewsServiceException {
+        System.out.println("работает");
+        newsService.publishNews(id);
+        System.out.println("работает2");
+        redirectAttributes.addFlashAttribute(CSS_ATTRIBUTE, CSS_SUCCESS_VALUE);
+        redirectAttributes.addFlashAttribute(MSG_ATTRIBUTE, NEWS_WAS_PUBLISHED_MESSAGE);
+
+        int currentPage = (int) httpSession.getAttribute(CURRENT_PAGE_NUMBER_ATTRIBUTE);
+
+        return REDIRECT_NEWS_OFFERED_PAGE + currentPage;
+
+    }
+
 
     @DeleteMapping("/{id}")
     public String deleteNews(@PathVariable(PATH_VARIABLE_ID) int id, final RedirectAttributes redirectAttributes,

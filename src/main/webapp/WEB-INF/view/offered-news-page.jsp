@@ -19,6 +19,7 @@
             link: black;
             color: black;
         }
+
         .reference {
             margin: 50px;
             font-size: 75px;
@@ -27,6 +28,7 @@
             link: black;
             color: black;
         }
+
         .textNews {
             font-size: 35px;
             width: auto;
@@ -105,15 +107,15 @@
     <div class=heading-1>
         <div class="heading-2" style="">
 
-                <form:form action="toAddNewsPage" modelAttribute="news" method="GET">
-                    <input type="submit" class="button" value="Create a news"/>
-                </form:form>
+            <form:form action="toAddNewsPage" modelAttribute="news" method="GET">
+                <input type="submit" class="button" value="Create a news"/>
+            </form:form>
 
-                <form:form
-                        action="${pageContext.request.contextPath}/logout"
-                        method="post">
-                    <input type="submit" class="button" value="Exit">
-                </form:form>
+            <form:form
+                    action="${pageContext.request.contextPath}/logout"
+                    method="post">
+                <input type="submit" class="button" value="Exit">
+            </form:form>
         </div>
     </div>
 </div>
@@ -137,7 +139,8 @@
                 <a href=${singleNewsLink}>${news.title}</a></th>
             </sec:authorize>
             <sec:authorize access="isAnonymous()">
-                <div>${news.title}</div></th>
+                <div>${news.title}</div>
+                </th>
             </sec:authorize>
 
         </tr>
@@ -146,17 +149,24 @@
             <td ALIGN="center"><p class="textDescription">
                 <p>${news.brief}</p>
 
-                    <form:form action="showUpdatePage?id=${news.id}" modelAttribute="news" method="POST"
-                               style="display: inline-block; text-decoration: none;">
-                        <input type="submit" value="Update" style="font-size: 20px;display: inline-block;
+                <form:form action="publish/${news.id}" modelAttribute="news" method="PUT"
+                           style="display: inline-block; text-decoration: none;">
+                    <input type="submit" value="To main page" style="font-size: 20px;display: inline-block;
                     background: #408080;color: black; padding: 1rem 1.5rem; text-decoration: none; "/>
-                    </form:form>
+                </form:form>
 
-                    <form:form action="${news.id}" modelAttribute="news" method="DELETE"
-                               style="display: inline-block; text-decoration: none;">
-                        <input type="submit" value="Delete" style="font-size: 20px;display: inline-block;
+
+                <form:form action="showUpdatePage?id=${news.id}" modelAttribute="news" method="POST"
+                           style="display: inline-block; text-decoration: none;">
+                    <input type="submit" value="Update" style="font-size: 20px;display: inline-block;
                     background: #408080;color: black; padding: 1rem 1.5rem; text-decoration: none; "/>
-                    </form:form>
+                </form:form>
+
+                <form:form action="${news.id}" modelAttribute="news" method="DELETE"
+                           style="display: inline-block; text-decoration: none;">
+                    <input type="submit" value="Delete" style="font-size: 20px;display: inline-block;
+                    background: #408080;color: black; padding: 1rem 1.5rem; text-decoration: none; "/>
+                </form:form>
 
                 <HR WIDTH="70%" ALIGN="center" SIZE="1">
             </td>

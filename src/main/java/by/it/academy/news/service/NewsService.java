@@ -13,6 +13,8 @@ public interface NewsService {
 
     void updateNews(News news) throws NewsServiceException;
 
+    void publishNews(int id) throws NewsServiceException;
+
     void offerNews(News news) throws NewsServiceException;
 
     void addNews(News news) throws NewsServiceException;

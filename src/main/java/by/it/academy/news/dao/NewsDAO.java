@@ -13,6 +13,8 @@ public interface NewsDAO {
 
     void updateNews(News news) throws DAOException;
 
+    void publishNews(int id) throws DAOException;
+
     void addNews(News news) throws DAOException;
 
     void offerNews(News news) throws DAOException;

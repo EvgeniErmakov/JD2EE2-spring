@@ -68,6 +68,16 @@ public class NewsServiceImpl implements NewsService {
 
     @Transactional
     @Override
+    public void publishNews(int id) throws NewsServiceException {
+        try {
+            newsDAO.publishNews(id);
+        } catch (DAOException e) {
+            throw new NewsServiceException(e);
+        }
+    }
+
+    @Transactional
+    @Override
     public void deleteNews(int id) throws NewsServiceException {
         try {
             newsDAO.deleteNews(id);

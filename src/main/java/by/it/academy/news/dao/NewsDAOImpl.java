@@ -18,6 +18,7 @@ public class NewsDAOImpl implements NewsDAO {
     private static final String SELECT_ALL_NEWS_QUERY = "from News where status ='pushed'";
     private static final String SELECT_ALL_OFFERED_NEWS_QUERY = "from News where status ='offered'";
     private static final String DELETE_NEWS_WITH_ID_QUERY = "delete from News where id=:id";
+    private static final String PUBLISH_NEWS_WITH_ID_QUERY = "update News SET status = 'pushed' where id=:id";
     private static final String SELECT_COUNT_OF_NEWS_QUERY = "select count(all id) from News  where status ='pushed'";
     private static final String SELECT_COUNT_OF_OFFERED_NEWS_QUERY = "select count(all id) from News  where status ='offered'";
 
@@ -28,6 +29,18 @@ public class NewsDAOImpl implements NewsDAO {
 
         try {
             return query.setFirstResult(offset).setMaxResults(noOfRecords).getResultList();
+        } catch (RuntimeException e) {
+            throw new DAOException(e);
+        }
+    }
+
+
+    @Override
+    public void updateNews(final News news) throws DAOException {
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        try {
+            currentSession.update(news);
         } catch (RuntimeException e) {
             throw new DAOException(e);
         }
@@ -81,17 +94,6 @@ public class NewsDAOImpl implements NewsDAO {
     }
 
     @Override
-    public void updateNews(final News news) throws DAOException {
-        Session currentSession = sessionFactory.getCurrentSession();
-
-        try {
-            currentSession.update(news);
-        } catch (RuntimeException e) {
-            throw new DAOException(e);
-        }
-    }
-
-    @Override
     public void deleteNews(int id) throws DAOException {
         Session currentSession = sessionFactory.getCurrentSession();
 
@@ -120,5 +122,18 @@ public class NewsDAOImpl implements NewsDAO {
         news.setDate(null);
         news.setStatus("offered");
         currentSession.save(news);
+    }
+
+
+    @Override
+    public void publishNews(int id) throws DAOException {
+        Session currentSession = sessionFactory.getCurrentSession();
+        try {
+            Query query = currentSession.createQuery(PUBLISH_NEWS_WITH_ID_QUERY);
+            query.setParameter("id", id);
+            query.executeUpdate();
+        } catch (RuntimeException e) {
+            throw new DAOException(e);
+        }
     }
 }
