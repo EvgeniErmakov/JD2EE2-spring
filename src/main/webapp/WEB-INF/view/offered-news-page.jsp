@@ -19,7 +19,14 @@
             link: black;
             color: black;
         }
-
+        .reference {
+            margin: 50px;
+            font-size: 75px;
+            font-family: serif !important;
+            text-align: left;
+            link: black;
+            color: black;
+        }
         .textNews {
             font-size: 35px;
             width: auto;
@@ -90,7 +97,10 @@
 
 
 <div class="heading">
-    <h1 class=headline>News Portal</h1>
+    <h1>
+        <c:url var="showUpdateLink" value="/news/start"/>
+        <a class="reference" href=${showUpdateLink}>News Portal</a>
+    </h1>
 
     <div class=heading-1>
         <div class="heading-2" style="">
@@ -158,7 +168,7 @@
     <c:set var="pageNumber" value="${sessionScope.currentPageNumber}"/>
     <c:choose>
         <c:when test="${pageNumber != 1}">
-            <c:url var="prevLink" value="/news/start?page=${pageNumber - 1}"/>
+            <c:url var="prevLink" value="/news/toOfferedNewsPage?page=${pageNumber - 1}"/>
             <a style="color: #95af88;" href="${prevLink}">< Previous</a>
         </c:when>
         <c:otherwise>
@@ -170,7 +180,7 @@
 <div class="pagination" style="width: 50%; margin: 0 auto; text-align: center;">
     <c:choose>
         <c:when test="${pageNumber lt pageCount}">
-            <c:url var="nextLink" value="/news/start?page=${pageNumber + 1}"/>
+            <c:url var="nextLink" value="/news/toOfferedNewsPage?page=${pageNumber + 1}"/>
             <a style="color: #95af88;" href="${nextLink}">Next ></a>
         </c:when>
         <c:otherwise>
