@@ -79,7 +79,7 @@ public class MainPageCommand {
         return GO_TO_CREATE_NEWS_PAGE;
     }
 
-    @RequestMapping(value="/login", method=RequestMethod.GET)
+    @GetMapping("/login")
     public String login() {
         return "login";
     }

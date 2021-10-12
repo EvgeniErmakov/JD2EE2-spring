@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
@@ -8,7 +9,7 @@
     <title>News portal main page</title>
 
     <style>
-        .headline2 {
+        .headline {
             margin: 50px;
             background-color: #408080;
             font-size: 75px;
@@ -50,12 +51,14 @@
             justify-content: space-between;
             align-items: center;
         }
+
         .text {
             text-align: center;
             margin: 10px;
             font-size: 35px;
             color: #008000;
         }
+
         .heading-2 {
             color: black;
             display: flex;
@@ -63,10 +66,12 @@
             margin-right: 10px;
             margin-left: 10px;
         }
+
         .heading-1 {
             display: flex;
             justify-content: center;
         }
+
         .button {
             margin: 5px;
             background: #408080;
@@ -85,13 +90,26 @@
 
 
 <div class="heading">
-    <h1 class=headline2>News Portal</h1>
+    <h1 class=headline>News Portal</h1>
 
     <div class=heading-1>
-        <div class="heading-2">
-        <form:form action="toAddNewsPage" modelAttribute="news" method="GET" >
-            <input  type="submit" class="button" value="Create a news"/>
-        </form:form>
+        <div class="heading-2" style="">
+            <sec:authorize access="isAnonymous()">
+                <form:form action="login" modelAttribute="news" method="GET">
+                    <input type="submit" class="button" value="Login"/>
+                </form:form> </sec:authorize>
+
+            <sec:authorize access="hasRole('USER')">
+                <form:form action="toAddNewsPage" modelAttribute="news" method="GET">
+                    <input type="submit" class="button" value="Create a news"/>
+                </form:form>
+
+                <form:form
+                        action="${pageContext.request.contextPath}/logout"
+                        method="post">
+                    <input type="submit" class="button" value="Exit">
+                </form:form>
+            </sec:authorize>
         </div>
     </div>
 </div>
@@ -117,16 +135,19 @@
             <td ALIGN="center"><p class="textDescription">
                 <p>${news.brief}</p>
 
-                <form:form action="showUpdatePage?id=${news.id}" modelAttribute="news" method="POST" style="display: inline-block; text-decoration: none;">
-                    <input  type="submit" value="Update" style="font-size: 20px;display: inline-block;
+                <sec:authorize access="hasRole('USER')">
+                    <form:form action="showUpdatePage?id=${news.id}" modelAttribute="news" method="POST"
+                               style="display: inline-block; text-decoration: none;">
+                        <input type="submit" value="Update" style="font-size: 20px;display: inline-block;
                     background: #408080;color: black; padding: 1rem 1.5rem; text-decoration: none; "/>
-                </form:form>
+                    </form:form>
 
-
-                <form:form action="${news.id}" modelAttribute="news" method="DELETE" style="display: inline-block; text-decoration: none;">
-                    <input  type="submit" value="Delete" style="font-size: 20px;display: inline-block;
+                    <form:form action="${news.id}" modelAttribute="news" method="DELETE"
+                               style="display: inline-block; text-decoration: none;">
+                        <input type="submit" value="Delete" style="font-size: 20px;display: inline-block;
                     background: #408080;color: black; padding: 1rem 1.5rem; text-decoration: none; "/>
-                </form:form>
+                    </form:form>
+                </sec:authorize>
 
                 <HR WIDTH="70%" ALIGN="center" SIZE="1">
             </td>

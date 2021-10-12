@@ -67,16 +67,6 @@
         <c:url var="showUpdateLink" value="/news/start"/>
         <a class="reference" href=${showUpdateLink}>News Portal</a>
     </h1>
-
-    <div class=heading-1>
-        <div class="heading-2">
-            <form:form
-                    action="${pageContext.request.contextPath}/logout"
-                    method="post">
-                <input type="submit" class="button" value="Exit">
-            </form:form>
-        </div>
-    </div>
 </div>
 
 

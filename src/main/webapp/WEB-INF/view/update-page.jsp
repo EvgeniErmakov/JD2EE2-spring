@@ -80,7 +80,7 @@
         <div style="align-content: center;">
             <form:errors path="title" cssClass="error" cssStyle="color: indianred"/><br>
             <label for="title" style="color: black;">Title:</label>
-            <form:textarea id="title" name="title" cols="100" maxlength="300"  path="title"/>
+            <form:textarea id="title" name="title" cols="100" maxlength="200"  path="title"/>
         </div>
 
         <div >
