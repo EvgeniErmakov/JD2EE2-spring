@@ -33,11 +33,13 @@ public class MainPageCommand {
     private static final String GO_TO_UPDATE_PAGE = "update-page";
     private static final String GO_TO_SINGLE_NEWS_PAGE = "single-news-page";
     private static final String GO_TO_CREATE_NEWS_PAGE = "create-news-page";
+    private static final String GO_TO_OFFER_NEWS_PAGE = "offer-news-page";
+    private static final String GO_TO_OFFERED_NEWS_PAGE = "offered-news-page";
     private static final String CSS_ATTRIBUTE = "css";
     private static final String REDIRECT_NEWS_START_PAGE = "redirect:/news/start?page=";
     private static final String MSG_ATTRIBUTE = "msg";
     private static final String CSS_DANGER_VALUE = "danger";
-    private static final String CSS_SUCCESS_VALUE = "success";
+    private static final String CSS_SUCCESS_VALUE = "Success";
 
     @Autowired
     private NewsService newsService;
@@ -63,6 +65,22 @@ public class MainPageCommand {
         return GO_TO_MAIN_PAGE;
     }
 
+
+    @RequestMapping("/toOfferedNewsPage")
+    public String toOfferedNewsPage(@RequestParam(name = "page", defaultValue = "1") int page, final Model model,
+                                    final HttpSession httpSession) throws NewsServiceException {
+        final int newsCount = newsService.getNumberOfAllOfferedNews();
+        final int pageCount = (int) Math.ceil(newsCount * 1.0 / RECORD_PER_PAGE);
+        final List<News> allNews =
+                newsService.getAllOfferedNews((page - 1) * RECORD_PER_PAGE, RECORD_PER_PAGE);
+
+        model.addAttribute(ALL_NEWS_ATTRIBUTE, allNews);
+        model.addAttribute(PAGE_COUNT_ATTRIBUTE, pageCount);
+        httpSession.setAttribute(CURRENT_PAGE_NUMBER_ATTRIBUTE, page);
+
+        return GO_TO_OFFERED_NEWS_PAGE;
+    }
+
     @GetMapping("/{id}")
     public String toSingleNewsPage(@PathVariable(PATH_VARIABLE_ID) int id, final Model model) throws NewsServiceException {
         final News singleNews = newsService.getSingleNews(id);
@@ -79,6 +97,13 @@ public class MainPageCommand {
         return GO_TO_CREATE_NEWS_PAGE;
     }
 
+    @RequestMapping("/toOfferNewsPage")
+    public String toOfferNewsPage(Model model) throws NewsServiceException {
+        News theNews = new News();
+        model.addAttribute(NEWS_ATTRIBUTE, theNews);
+        return GO_TO_OFFER_NEWS_PAGE;
+    }
+
     @GetMapping("/login")
     public String login() {
         return "login";
@@ -92,6 +117,18 @@ public class MainPageCommand {
             modelAndView.setViewName(GO_TO_CREATE_NEWS_PAGE);
         } else {
             newsService.addNews(news);
+            modelAndView.setViewName("redirect:/news/start");
+        }
+        return modelAndView;
+    }
+
+    @PostMapping("/offerNews")
+    public ModelAndView offerNews(@Valid @ModelAttribute("news") News news, BindingResult theBindingResult) throws NewsServiceException {
+        ModelAndView modelAndView = new ModelAndView();
+        if (theBindingResult.hasErrors()) {
+            modelAndView.setViewName(GO_TO_OFFER_NEWS_PAGE);
+        } else {
+            newsService.offerNews(news);
             modelAndView.setViewName("redirect:/news/start");
         }
         return modelAndView;
@@ -136,7 +173,7 @@ public class MainPageCommand {
         newsService.deleteNews(id);
 
         redirectAttributes.addFlashAttribute(CSS_ATTRIBUTE, CSS_SUCCESS_VALUE);
-        redirectAttributes.addFlashAttribute(MSG_ATTRIBUTE, "News was deleted!");
+        redirectAttributes.addFlashAttribute(MSG_ATTRIBUTE, "News has deleted!");
 
         int currentPage = (int) httpSession.getAttribute(CURRENT_PAGE_NUMBER_ATTRIBUTE);
 

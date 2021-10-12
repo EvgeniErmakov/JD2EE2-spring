@@ -42,15 +42,20 @@ public class News implements Serializable {
   @Column(name = "date", updatable = false)
   private Date date;
 
+  @Column(name = "status", updatable = false)
+  private String status;
+
+
   public News() {}
 
-  public News(int id, String title, String brief, String body, String author, Date date) {
+  public News(int id, String title, String brief, String body, String author, Date date, String status) {
     this.id = id;
     this.title = title;
     this.brief = brief;
     this.body = body;
     this.author = author;
     this.date = date;
+    this.status = status;
   }
 
   public int getId() {
@@ -101,19 +106,29 @@ public class News implements Serializable {
     this.date = date;
   }
 
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (!(o instanceof News)) return false;
 
     News news = (News) o;
 
-    if (id != news.id) return false;
-    if (title != null ? !title.equals(news.title) : news.title != null) return false;
-    if (brief != null ? !brief.equals(news.brief) : news.brief != null) return false;
-    if (body != null ? !body.equals(news.body) : news.body != null) return false;
-    if (author != null ? !author.equals(news.author) : news.author != null) return false;
-    return date != null ? date.equals(news.date) : news.date == null;
+    if (getId() != news.getId()) return false;
+    if (!getTitle().equals(news.getTitle())) return false;
+    if (!getBrief().equals(news.getBrief())) return false;
+    if (!getBody().equals(news.getBody())) return false;
+    if (!getAuthor().equals(news.getAuthor())) return false;
+    if (!getDate().equals(news.getDate())) return false;
+    return getStatus().equals(news.getStatus());
   }
 
   @Override
@@ -124,12 +139,20 @@ public class News implements Serializable {
     result = 31 * result + (body != null ? body.hashCode() : 0);
     result = 31 * result + (author != null ? author.hashCode() : 0);
     result = 31 * result + (date != null ? date.hashCode() : 0);
+    result = 31 * result + (status != null ? status.hashCode() : 0);
     return result;
   }
 
   @Override
   public String toString() {
-    return "News{" + "id=" + id + ", title='" + title + '\'' + ", brief='" + brief + '\'' + ", body='"
-        + body + '\'' + ", author='" + author + '\'' + ", date=" + date + '}';
+    return "News{" +
+            "id=" + id +
+            ", title='" + title + '\'' +
+            ", brief='" + brief + '\'' +
+            ", body='" + body + '\'' +
+            ", author='" + author + '\'' +
+            ", date=" + date +
+            ", status='" + status + '\'' +
+            '}';
   }
 }

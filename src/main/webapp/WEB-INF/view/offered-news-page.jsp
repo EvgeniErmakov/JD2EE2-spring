@@ -94,34 +94,16 @@
 
     <div class=heading-1>
         <div class="heading-2" style="">
-            <sec:authorize access="isAnonymous()">
-                <form:form action="login" modelAttribute="news" method="GET">
-                    <input type="submit" class="button" value="Login"/>
-                </form:form> </sec:authorize>
 
-            <sec:authorize access="hasRole('ADMIN')">
                 <form:form action="toAddNewsPage" modelAttribute="news" method="GET">
                     <input type="submit" class="button" value="Create a news"/>
                 </form:form>
 
-                <form:form action="toOfferedNewsPage" modelAttribute="news" method="GET">
-                    <input type="submit" class="button" value="Offered news"/>
-                </form:form>
-            </sec:authorize>
-
-            <sec:authorize access="hasRole('JOURNALIST')">
-                <form:form action="toOfferNewsPage" modelAttribute="news" method="GET">
-                    <input type="submit" class="button" value="Offer a news"/>
-                </form:form>
-            </sec:authorize>
-
-            <sec:authorize access="!isAnonymous()">
                 <form:form
                         action="${pageContext.request.contextPath}/logout"
                         method="post">
                     <input type="submit" class="button" value="Exit">
                 </form:form>
-            </sec:authorize>
         </div>
     </div>
 </div>
@@ -154,7 +136,6 @@
             <td ALIGN="center"><p class="textDescription">
                 <p>${news.brief}</p>
 
-                <sec:authorize access="hasRole('ADMIN')">
                     <form:form action="showUpdatePage?id=${news.id}" modelAttribute="news" method="POST"
                                style="display: inline-block; text-decoration: none;">
                         <input type="submit" value="Update" style="font-size: 20px;display: inline-block;
@@ -166,7 +147,6 @@
                         <input type="submit" value="Delete" style="font-size: 20px;display: inline-block;
                     background: #408080;color: black; padding: 1rem 1.5rem; text-decoration: none; "/>
                     </form:form>
-                </sec:authorize>
 
                 <HR WIDTH="70%" ALIGN="center" SIZE="1">
             </td>

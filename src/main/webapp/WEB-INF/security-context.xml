@@ -14,7 +14,7 @@
 
 		<access-denied-handler error-page="/news/login" />
 
-		<intercept-url pattern="/news/toAddNewsPage" access="ROLE_USER, ROLE_ADMIN" />
+		<intercept-url pattern="/news/toAddNewsPage" access="ROLE_ADMIN" />
 
 
 
