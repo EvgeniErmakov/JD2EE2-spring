@@ -130,7 +130,14 @@
     <c:forEach var="news" items="${allNews}">
         <tr ALIGN="center">
             <th ALIGN="center"><c:url var="singleNewsLink" value="/news/${news.id}"/>
+
+                <sec:authorize access="!isAnonymous()">
                 <a href=${singleNewsLink}>${news.title}</a></th>
+            </sec:authorize>
+            <sec:authorize access="isAnonymous()">
+                <div>${news.title}</div></th>
+            </sec:authorize>
+
         </tr>
 
         <tr ALIGN="center">
