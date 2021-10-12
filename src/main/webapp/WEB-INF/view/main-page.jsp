@@ -99,11 +99,13 @@
                     <input type="submit" class="button" value="Login"/>
                 </form:form> </sec:authorize>
 
-            <sec:authorize access="hasRole('USER')">
+            <sec:authorize access="hasRole('ADMIN')">
                 <form:form action="toAddNewsPage" modelAttribute="news" method="GET">
                     <input type="submit" class="button" value="Create a news"/>
                 </form:form>
+            </sec:authorize>
 
+            <sec:authorize access="!isAnonymous()">
                 <form:form
                         action="${pageContext.request.contextPath}/logout"
                         method="post">
@@ -135,7 +137,7 @@
             <td ALIGN="center"><p class="textDescription">
                 <p>${news.brief}</p>
 
-                <sec:authorize access="hasRole('USER')">
+                <sec:authorize access="hasRole('ADMIN')">
                     <form:form action="showUpdatePage?id=${news.id}" modelAttribute="news" method="POST"
                                style="display: inline-block; text-decoration: none;">
                         <input type="submit" value="Update" style="font-size: 20px;display: inline-block;
