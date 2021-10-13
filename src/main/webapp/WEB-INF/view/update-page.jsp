@@ -10,51 +10,8 @@
 <meta charset="UTF-8">
 <title>Update News</title>
 <style>
-    .heading {
-        margin: 10px 0px;
-        height: 180px;
-        background-color: #408080;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .reference {
-        margin: 50px;
-        font-size: 75px;
-        font-family: serif !important;
-        text-align: left;
-        link: black;
-        color: black;
-    }
-    .buttons{
-        font-size: 20px;
-        display: inline-block;
-        background: #408080;
-        color: black;
-        padding: 1rem 1.5rem;
-        text-decoration: none;
-    }
-    .textNews {
-        font-size: 35px;
-        width: auto;
-        word-break: break-word;
-        color: #000000;
-        margin: auto;
-        text-align: justify;
-        align-items: center;
-    }
-
-    .textDescription {
-        text-indent: 75px;
-        text-align: justify;
-        margin: 10px;
-        font-size: 28px;
-        color: #000000;
-    }
+    <%@include file='/./resources/css/style.css' %>
 </style>
-
-
 <body>
 <div class="heading">
     <h1>

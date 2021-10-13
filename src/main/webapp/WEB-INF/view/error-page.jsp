@@ -5,32 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Error Page</title>
-    <style>
-        #ErrorPage {
-            display: flex;
-            flex-flow: column wrap;
-            align-items: center;
-            color: red;
-            font-size: 40px;
-        }
 
-        .heading {
-            margin: 10px 0px;
-            height: 180px;
-            background-color: #408080;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .reference {
-            margin: 50px;
-            font-size: 75px;
-            font-family: serif !important;
-            text-align: left;
-            link: black;
-            color: black;
-        }
+    <style>
+        <%@include file='/./resources/css/style.css' %>
     </style>
+
 </head>
 <body>
 

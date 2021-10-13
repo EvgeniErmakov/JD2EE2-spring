@@ -7,87 +7,11 @@
 <head>
     <meta charset="utf-8">
     <title>News portal main page</title>
-
     <style>
-        .headline {
-            margin: 50px;
-            background-color: #408080;
-            font-size: 75px;
-            font-family: Georgia, serif !important;
-            text-align: left;
-            text-decoration: none;
-            link: black;
-            color: black;
-        }
-
-        .textNews {
-            font-size: 35px;
-            width: auto;
-            word-break: break-word;
-            color: #000000;
-            margin: auto;
-            text-align: justify;
-            align-items: center;
-        }
-
-        .pagination {
-            border-top: 1px white solid;
-            font-size: 35px;
-            margin: 20px;
-            margin-left: 0px;
-            margin-right: 0px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: white;
-        }
-
-        .heading {
-            margin: 10px 0px;
-            height: 180px;
-            background-color: #408080;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .text {
-            text-align: center;
-            margin: 10px;
-            font-size: 35px;
-            color: #008000;
-        }
-
-        .heading-2 {
-            color: black;
-            display: flex;
-            flex-direction: column;
-            margin-right: 10px;
-            margin-left: 10px;
-        }
-
-        .heading-1 {
-            display: flex;
-            justify-content: center;
-        }
-
-        .button {
-            margin: 5px;
-            background: #408080;
-            color: #000000;
-            width: 225px;
-            height: 40px;
-            font-size: 25px;
-            cursor: pointer;
-            text-align: center;
-        }
+        <%@include file='/./resources/css/style.css' %>
     </style>
-
 </head>
-
 <body>
-
 
 <div class="heading">
     <h1 class=headline>News Portal</h1>
@@ -179,22 +103,20 @@
     <c:choose>
         <c:when test="${pageNumber != 1}">
             <c:url var="prevLink" value="/news/start?page=${pageNumber - 1}"/>
-            <a style="color: #95af88;" href="${prevLink}">< Previous</a>
+            <a style="color: #95af88;" href="${prevLink}"><< PreviousPage      .</a>
         </c:when>
         <c:otherwise>
-            <a class="isDisabled" href="javascript:void(0)">< Previous</a>
+            <a class="isDisabled" href="javascript:void(0)"><< PreviousPage      .</a>
         </c:otherwise>
     </c:choose>
-</div>
 
-<div class="pagination" style="width: 50%; margin: 0 auto; text-align: center;">
     <c:choose>
         <c:when test="${pageNumber lt pageCount}">
             <c:url var="nextLink" value="/news/start?page=${pageNumber + 1}"/>
-            <a style="color: #95af88;" href="${nextLink}">Next ></a>
+            <a style="color: #95af88;" href="${nextLink}">.      NextPage >></a>
         </c:when>
         <c:otherwise>
-            <a class="isDisabled" href="javascript:void(0)">Next ></a>
+            <a class="isDisabled" href="javascript:void(0)">.      NextPage >></a>
         </c:otherwise>
     </c:choose>
 

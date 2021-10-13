@@ -10,52 +10,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Registration Page</title>
+
     <style>
-
-        .reference {
-            margin: 50px;
-            font-size: 75px;
-            font-family: serif !important;
-            text-align: left;
-            link: black;
-            color: black;
-        }
-
-        .heading {
-            margin: 10px 0px;
-            height: 180px;
-            background-color: #408080;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .form {
-            position: relative;
-            z-index: 1;
-            background: #FFFFFF;
-            max-width: 360px;
-            margin: 0 auto 100px;
-            padding: 45px;
-            text-align: center;
-            box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-        }
-
-        .button {
-            margin: 5px;
-            background: #408080;
-            color: #000000;
-            width: 225px;
-            height: 40px;
-            font-size: 25px;
-            cursor: pointer;
-            text-align: center;
-        }
-        .wrapper {
-            display: flex;
-            flex-direction: column;
-            margin: 5px;
-        }
+        <%@include file='/./resources/css/style.css' %>
     </style>
 
 </head>

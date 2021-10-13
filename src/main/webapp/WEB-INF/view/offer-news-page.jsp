@@ -12,55 +12,8 @@
 <meta charset="UTF-8">
 <title>Update News</title>
 <style>
-    .heading {
-        margin: 10px 0px;
-        height: 180px;
-        background-color: #408080;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .reference {
-        margin: 50px;
-        font-size: 75px;
-        font-family: serif !important;
-        text-align: left;
-        link: black;
-        color: black;
-    }
-    .buttons{
-        font-size: 20px;
-        display: inline-block;
-        background: #408080;
-        color: black;
-        padding: 1rem 1.5rem;
-        text-decoration: none;
-    }
-    .heading-2 {
-        color: black;
-        display: flex;
-        flex-direction: column;
-        margin-right: 10px;
-        margin-left: 10px;
-    }
-    .heading-1 {
-        display: flex;
-        justify-content: center;
-    }
-    .button {
-        margin: 5px;
-        background: #408080;
-        color: #000000;
-        width: 225px;
-        height: 40px;
-        font-size: 25px;
-        cursor: pointer;
-        text-align: center;
-    }
+    <%@include file='/./resources/css/style.css' %>
 </style>
-
-
 <body>
 <div class="heading">
     <h1>
