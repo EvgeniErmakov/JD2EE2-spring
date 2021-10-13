@@ -15,8 +15,8 @@ import org.springframework.stereotype.Repository;
 public class NewsDAOImpl implements NewsDAO {
     @Autowired
     private SessionFactory sessionFactory;
-    private static final String SELECT_ALL_NEWS_QUERY = "from News where status ='pushed'";
-    private static final String SELECT_ALL_OFFERED_NEWS_QUERY = "from News where status ='offered'";
+    private static final String SELECT_ALL_NEWS_QUERY = "from News where status ='pushed' ORDER BY id DESC";
+    private static final String SELECT_ALL_OFFERED_NEWS_QUERY = "from News where status ='offered' ORDER BY id DESC";
     private static final String DELETE_NEWS_WITH_ID_QUERY = "delete from News where id=:id";
     private static final String PUBLISH_NEWS_WITH_ID_QUERY = "update News SET status = 'pushed' where id=:id";
     private static final String SELECT_COUNT_OF_NEWS_QUERY = "select count(all id) from News  where status ='pushed'";

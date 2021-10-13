@@ -28,7 +28,7 @@ public class MainPageCommand {
     private static final String PAGE_COUNT_ATTRIBUTE = "pageCount";
     private static final String UPDATE_FAILED_MESSAGE = "Update failed";
     private static final String NEWS_WAS_UPDATED_MESSAGE = "News has been updated!";
-    private static final String NEWS_WAS_PUBLISHED_MESSAGE = "News has was published!";
+    private static final String NEWS_WAS_PUBLISHED_MESSAGE = "News has been published!";
     private static final String NEWS_WAS_DELETED_MESSAGE = "News has deleted!";
     private static final String OPERATION_FAILED_MESSAGE = "Operation failed, please try again later...";
     private static final String CURRENT_PAGE_NUMBER_ATTRIBUTE = "currentPageNumber";
