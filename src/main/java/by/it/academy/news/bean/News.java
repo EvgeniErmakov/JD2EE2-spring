@@ -45,7 +45,6 @@ public class News implements Serializable {
   @Column(name = "status", updatable = false)
   private String status;
 
-
   public News() {}
 
   public News(int id, String title, String brief, String body, String author, Date date, String status) {
@@ -113,7 +112,6 @@ public class News implements Serializable {
   public void setStatus(String status) {
     this.status = status;
   }
-
 
   @Override
   public boolean equals(Object o) {

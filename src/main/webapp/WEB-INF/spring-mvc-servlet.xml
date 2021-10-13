@@ -53,9 +53,6 @@
         </property>
     </bean>
 
-
-
-
     <bean id="myTransactionManager"
           class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>

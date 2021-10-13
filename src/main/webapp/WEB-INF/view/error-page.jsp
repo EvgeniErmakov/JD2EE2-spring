@@ -5,12 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Error Page</title>
-
     <style>
         <%@include file='/./resources/css/style.css' %>
     </style>
-
 </head>
+
 <body>
 
 <div class="heading">
@@ -19,7 +18,6 @@
         <a class="reference" href=${showUpdateLink}>News Portal</a>
     </h1>
 </div>
-
 
 <div id="ErrorPage">
     <span style="color: #95af88; font-family: Verdana,serif; padding-top: 20px; font-size: larger">

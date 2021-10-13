@@ -49,14 +49,6 @@ body {
     font-size: 40px;
 }
 
-.reference {
-    margin: 50px;
-    font-size: 75px;
-    font-family: serif !important;
-    text-align: left;
-    link: black;
-    color: black;
-}
 .button_local {
     margin: 5px;
     background: #408080;
@@ -87,10 +79,6 @@ body {
     text-decoration: none;
 }
 
-.form {
-    margin: 0 25% 0 25%;
-    width: 50%;
-}
 #update-button {
     background-color: #408080;
 }
@@ -168,15 +156,6 @@ body {
 .pagination a:hover:not(.active) {
     background-color: white;
 }
-.textNews {
-    font-size: 35px;
-    width: auto;
-    word-break: break-word;
-    color: #000000;
-    margin: auto;
-    text-align: justify;
-    align-items: center;
-}
 
 .text {
     text-align: center;
@@ -192,8 +171,6 @@ body {
     border: 3px solid #cecece;
     background: #c0c0c0;
 }
-
-
 
 .reference {
     margin: 50px;

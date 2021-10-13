@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,7 @@
         <%@include file='/./resources/css/style.css' %>
     </style>
 </head>
+
 <body>
 
 <div class="heading">
@@ -50,7 +52,6 @@
     </div>
 </div>
 
-
 <HR WIDTH="70%" ALIGN="center" SIZE="1">
 
 <c:if test="${not empty msg}">
@@ -71,7 +72,6 @@
             <sec:authorize access="isAnonymous()">
                 <div>${news.title}</div></th>
             </sec:authorize>
-
         </tr>
 
         <tr ALIGN="center">
@@ -119,7 +119,7 @@
             <a class="isDisabled" href="javascript:void(0)">.      NextPage >></a>
         </c:otherwise>
     </c:choose>
-
 </div>
+
 </body>
 </html>
