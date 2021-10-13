@@ -30,6 +30,7 @@ public class MainPageCommand {
     private static final String NEWS_WAS_UPDATED_MESSAGE = "News has been updated!";
     private static final String NEWS_WAS_PUBLISHED_MESSAGE = "News has was published!";
     private static final String NEWS_WAS_DELETED_MESSAGE = "News has deleted!";
+    private static final String OPERATION_FAILED_MESSAGE = "Operation failed, please try again later...";
     private static final String CURRENT_PAGE_NUMBER_ATTRIBUTE = "currentPageNumber";
     private static final String GO_TO_MAIN_PAGE = "main-page";
     private static final String GO_TO_UPDATE_PAGE = "update-page";
@@ -199,7 +200,7 @@ public class MainPageCommand {
     public String exceptionHandler(final RedirectAttributes redirectAttributes, final HttpSession httpSession) {
         redirectAttributes.addFlashAttribute(CSS_ATTRIBUTE, CSS_DANGER_VALUE);
         redirectAttributes.addFlashAttribute(
-                MSG_ATTRIBUTE, "Operation failed, please try again later...");
+                MSG_ATTRIBUTE, OPERATION_FAILED_MESSAGE);
 
         int currentPage = (int) httpSession.getAttribute(CURRENT_PAGE_NUMBER_ATTRIBUTE);
 
