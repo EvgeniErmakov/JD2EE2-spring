@@ -21,6 +21,8 @@ public class NewsDAOImpl implements NewsDAO {
     private static final String PUBLISH_NEWS_WITH_ID_QUERY = "update News SET status = 'pushed' where id=:id";
     private static final String SELECT_COUNT_OF_NEWS_QUERY = "select count(all id) from News  where status ='pushed'";
     private static final String SELECT_COUNT_OF_OFFERED_NEWS_QUERY = "select count(all id) from News  where status ='offered'";
+    private static final String STATUS_OFFERED_FOR_NEWS = "offered";
+    private static final String STATUS_PUSHED_FOR_NEWS = "pushed";
 
     @Override
     public List<News> getAllNews(int offset, int noOfRecords) throws DAOException {
@@ -109,7 +111,7 @@ public class NewsDAOImpl implements NewsDAO {
         Session currentSession = sessionFactory.getCurrentSession();
         news.setAuthor(null);
         news.setDate(null);
-        news.setStatus("pushed");
+        news.setStatus(STATUS_PUSHED_FOR_NEWS);
         currentSession.save(news);
     }
 
@@ -118,7 +120,7 @@ public class NewsDAOImpl implements NewsDAO {
         Session currentSession = sessionFactory.getCurrentSession();
         news.setAuthor(null);
         news.setDate(null);
-        news.setStatus("offered");
+        news.setStatus(STATUS_OFFERED_FOR_NEWS);
         currentSession.save(news);
     }
 
