@@ -34,7 +34,6 @@ public class NewsDAOImpl implements NewsDAO {
         }
     }
 
-
     @Override
     public void updateNews(final News news) throws DAOException {
         Session currentSession = sessionFactory.getCurrentSession();
@@ -68,7 +67,6 @@ public class NewsDAOImpl implements NewsDAO {
             throw new DAOException(e);
         }
     }
-
 
     @Override
     public int getNumberOfAllOfferedNews() throws DAOException {
@@ -123,7 +121,6 @@ public class NewsDAOImpl implements NewsDAO {
         news.setStatus("offered");
         currentSession.save(news);
     }
-
 
     @Override
     public void publishNews(int id) throws DAOException {
